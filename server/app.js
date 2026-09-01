@@ -1,0 +1,30 @@
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import { routeInspector } from "./src/middlewares/routeInspector.middlewares.js";
+import { errorHandler } from "./src/middlewares/errorHandler.middlewares.js";
+// import { userRouter } from "./src/modules/auth/routes/userRouter.routes.js";
+// import { productRouter } from "./src/modules/products/routes/productRouter.routes.js";
+
+export const app = express();
+
+app.use(helmet());
+app.use(
+  cors({
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    origin: "http://localhost:5173",
+    allowedHeaders: ["Content-type", "Authorization"],
+    credentials: true,
+  }),
+);
+app.use(express.json({ limit: "16kb" }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(cookieParser());
+app.use(routeInspector);
+
+// app.use("/api/user", userRouter);
+// app.use("/api/product", productRouter);
+
+app.use(errorHandler);
