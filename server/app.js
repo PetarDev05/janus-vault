@@ -4,8 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { routeInspector } from "./src/middlewares/routeInspector.middlewares.js";
 import { errorHandler } from "./src/middlewares/errorHandler.middlewares.js";
-// import { userRouter } from "./src/modules/auth/routes/userRouter.routes.js";
-// import { productRouter } from "./src/modules/products/routes/productRouter.routes.js";
+import { userRouter } from "./src/modules/auth/routes/userRouter.routes.js";
 
 export const app = express();
 
@@ -24,7 +23,6 @@ app.use(express.static("public"));
 app.use(cookieParser());
 app.use(routeInspector);
 
-// app.use("/api/user", userRouter);
-// app.use("/api/product", productRouter);
+app.use("/api/user", userRouter);
 
 app.use(errorHandler);
