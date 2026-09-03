@@ -1,4 +1,5 @@
 import { Schema, model, Types } from "mongoose";
+import { setExpirationDate } from "../utils/setExpirationDate.utils.js";
 
 const sessionSchema = new Schema(
   {
@@ -18,5 +19,18 @@ const sessionSchema = new Schema(
   },
   { timestamps: true },
 );
+
+sessionSchema.statics.createSession = async function (
+  userID,
+  refreshTokenHash,
+) {
+  const expDate = setExpirationDate();
+
+  await this.create({
+    userID,
+    refreshToken: refreshTokenHash,
+    expiresAt: expDate,
+  });
+};
 
 export default model("Session", sessionSchema);

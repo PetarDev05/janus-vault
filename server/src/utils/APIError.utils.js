@@ -1,10 +1,9 @@
 class APIError extends Error {
-  constructor(statusCode, code, message, leave) {
+  constructor(statusCode, code, message) {
     super(message);
     this.success = false;
     this.statusCode = statusCode;
     this.code = code;
-    this.leave = leave;
 
     Error.captureStackTrace(this, this.constructor);
   }
