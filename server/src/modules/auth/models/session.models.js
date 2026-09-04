@@ -20,6 +20,11 @@ const sessionSchema = new Schema(
   { timestamps: true },
 );
 
+sessionSchema.index(
+    { expiresAt: 1 },
+    { expireAfterSeconds: 0 }
+);
+
 sessionSchema.statics.createSession = async function (
   userID,
   refreshTokenHash,

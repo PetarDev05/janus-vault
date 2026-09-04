@@ -60,4 +60,18 @@ userSchema.statics.createNewUser = async function (
   return newUser;
 };
 
+// Sign-in methods
+
+userSchema.statics.findUserByUsername = async function (username) {
+  const existingUser = await this.findOne({ username });
+  if (!existingUser) {
+    throw new APIError(
+      404,
+      "USER_NOT_FOUND",
+      "Account is not found. Check your sign in credentials.",
+    );
+  }
+  return existingUser;
+};
+
 export default model("User", userSchema);
