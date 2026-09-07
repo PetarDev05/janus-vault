@@ -74,4 +74,20 @@ userSchema.statics.findUserByUsername = async function (username) {
   return existingUser;
 };
 
+// Refresh methods
+
+userSchema.statics.findUserById = async function (userID) {
+  const user = await this.findOne({ _id: userID });
+
+  if (!user) {
+    throw new APIError(
+      404,
+      "USER_NOT_FOUND",
+      "User not found. Please sign in again.",
+    );
+  }
+
+  return user;
+};
+
 export default model("User", userSchema);
