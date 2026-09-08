@@ -6,7 +6,7 @@ import { checkRefreshToken } from "../validators/checkRefreshToken.validators.js
 
 export const refreshSessionService = async (refreshToken) => {
   // validate refresh token existance
-  checkRefreshToken(refreshToken);
+  checkRefreshToken(refreshToken, "refresh");
 
   // hash token
   const refreshTokenHash = cryptoHashToken(refreshToken);

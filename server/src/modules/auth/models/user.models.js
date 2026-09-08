@@ -90,4 +90,10 @@ userSchema.statics.findUserById = async function (userID) {
   return user;
 };
 
+// Delete methods
+
+userSchema.statics.deleteUser = async function (userID) {
+  await this.findByIdAndDelete(userID);
+};
+
 export default model("User", userSchema);

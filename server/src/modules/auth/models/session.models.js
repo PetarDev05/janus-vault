@@ -40,6 +40,8 @@ sessionSchema.statics.createSession = async function (
 sessionSchema.statics.findSessionByToken = async function (refreshTokenHash) {
   const session = await this.findOne({ refreshToken: refreshTokenHash });
 
+  console.log(session);
+  
   if (!session) {
     throw new APIError(
       404,
@@ -59,6 +61,14 @@ sessionSchema.statics.findSessionByToken = async function (refreshTokenHash) {
   }
 
   return session;
+};
+
+sessionSchema.statics.deleteUserSession = async function (refreshTokenHash) {
+  await this.deleteOne({ refreshToken: refreshTokenHash });
+};
+
+sessionSchema.statics.deleteAllUserSessions = async function (userID) {
+  await this.deleteMany({ userID });
 };
 
 export default model("Session", sessionSchema);
