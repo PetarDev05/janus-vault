@@ -11,16 +11,14 @@ export const errorHandler = (err, req, res, next) => {
     if (error instanceof TokenExpiredError.TokenExpiredError) {
       error = new APIError(
         401,
-        "TOKEN_EXPIRED",
-        "Your session expired. Please sign in again.",
-        true,
+        "AUTHORIZATION_ERROR",
+        "Access token expired.",
       );
     } else {
       error = new APIError(
         401,
-        "INVALID_TOKEN",
+        "TOKEN_MALFORMED",
         "Security issue detected. Please sign in again.",
-        true,
       );
     }
   } else {
@@ -29,7 +27,6 @@ export const errorHandler = (err, req, res, next) => {
         500,
         "INTERNAL_ERROR",
         "Something went wrong. Please try again later.",
-        false,
       );
     }
   }

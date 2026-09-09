@@ -10,12 +10,7 @@ export const routeGuard = async (req, res, next) => {
 
     // check if content exists
     if (!authorization || typeof authorization !== "string") {
-      throw new APIError(
-        401,
-        "INVALID_AUTHORIZATION_HEADER",
-        "Access denied.",
-        false,
-      );
+      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.");
     }
 
     // extract Bearer and token from authorization header contents
@@ -23,7 +18,7 @@ export const routeGuard = async (req, res, next) => {
 
     // check if all extracted values are viable
     if (!bearer || bearer !== "Bearer" || !accessToken) {
-      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.", false);
+      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.");
     }
 
     // validate token and decode user id from it
@@ -38,10 +33,6 @@ export const routeGuard = async (req, res, next) => {
     // forward to the next piece of middleware
     next();
   } catch (error) {
-    if (error instanceof TokenExpiredError.TokenExpiredError) {
-      next(new APIError(401, "TOKEN_EXPIRED", "Access token expired.", false));
-    } else {
-      next(error);
-    }
+    next(error);
   }
 };
