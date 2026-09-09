@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  font-family: "Google Sans";
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* global colors */
+  --primary: #3a58ff;
+  --sign-out-orange: #eb9c42;
+  --delete-red: #c41919;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* light theme */
+  --bg-light-primary: #f7f7f7;
+  --button-bg-layer-light: #f0f0f0;
+  --border-light: #dddddd;
+  --text-light: #949494;
+  --heading-light: #00023a;
+  --card-light: #fafafa;
+  
+  /* dark theme */
+  --bg-dark-primary: #060606;
+  --button-bg-layer-dark: #252525;
+  --border-dark: #303030;
+  --text-dark: #8d8d8d;
+  --heading-dark: #eeeeee;
+  --card-dark: #131313;
+
+  /* toast colors */
+  --toast-success: #2fd078;
+  --toast-error: #e62b2b;
+  --toast-info: #9729f7;
+}
