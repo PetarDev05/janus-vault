@@ -1,4 +1,4 @@
-import Logo from "./units/Logo.components.jsx";
+import Logo from "../global/units/Logo.components.jsx";
 import ProfileIcon from "./units/ProfileIcon.components.jsx";
 import SearchBar from "./units/SearchBar.components.jsx";
 
