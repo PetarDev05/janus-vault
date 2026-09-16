@@ -11,7 +11,7 @@ const App = () => {
         toastOptions={{
           style: {
             color: "var(--white)",
-            backgroundColor: "var(--toast-info)",
+            backgroundColor: "var(--primary)",
           },
           success: {
             style: {
@@ -25,7 +25,7 @@ const App = () => {
               backgroundColor: "var(--toast-error)",
             },
           },
-          duration: 4000,
+          duration: 8000,
         }}
       />
     </main>

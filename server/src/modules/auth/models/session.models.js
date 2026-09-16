@@ -40,13 +40,12 @@ sessionSchema.statics.createSession = async function (
 sessionSchema.statics.findSessionByToken = async function (refreshTokenHash) {
   const session = await this.findOne({ refreshToken: refreshTokenHash });
 
-  console.log(session);
-  
   if (!session) {
     throw new APIError(
       404,
       "SESSION_NOT_FOUND",
       "Your session expired, please sign in again.",
+      "SIGN_OUT",
     );
   }
 
@@ -57,6 +56,7 @@ sessionSchema.statics.findSessionByToken = async function (refreshTokenHash) {
       401,
       "SESSION_EXPIRED",
       "Your session expired, please sign in again.",
+      "SIGN_OUT",
     );
   }
 

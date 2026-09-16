@@ -13,12 +13,14 @@ export const errorHandler = (err, req, res, next) => {
         401,
         "AUTHORIZATION_ERROR",
         "Access token expired.",
+        null,
       );
     } else {
       error = new APIError(
         401,
         "TOKEN_MALFORMED",
         "Security issue detected. Please sign in again.",
+        "SIGN_OUT",
       );
     }
   } else {
@@ -27,6 +29,7 @@ export const errorHandler = (err, req, res, next) => {
         500,
         "INTERNAL_ERROR",
         "Something went wrong. Please try again later.",
+        null,
       );
     }
   }
@@ -36,7 +39,6 @@ export const errorHandler = (err, req, res, next) => {
     statusCode: error.statusCode,
     code: error.code,
     message: error.message,
-    leave: error.leave,
   };
 
   if (process.env.NODE_ENV === "development") {

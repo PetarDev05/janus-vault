@@ -3,7 +3,12 @@ import validator from "validator";
 
 export const validateRegistrationCredentials = (username, email, password) => {
   if (!username || !email || !password) {
-    throw new APIError(400, "INVALID_CREDENTIALS", "All fields are required.");
+    throw new APIError(
+      400,
+      "INVALID_CREDENTIALS",
+      "All fields are required.",
+      null,
+    );
   }
 
   if (username.length < 2) {
@@ -11,6 +16,7 @@ export const validateRegistrationCredentials = (username, email, password) => {
       400,
       "INVALID_CREDENTIALS",
       "Username can't be shorter than 2 characters.",
+      null,
     );
   }
 
@@ -19,11 +25,17 @@ export const validateRegistrationCredentials = (username, email, password) => {
       400,
       "INVALID_CREDENTIALS",
       "Username can't be longer than 50 characters.",
+      null,
     );
   }
 
   if (!validator.isEmail(email)) {
-    throw new APIError(400, "INVALID_CREDENTIALS", "Invalid email format.");
+    throw new APIError(
+      400,
+      "INVALID_CREDENTIALS",
+      "Invalid email format.",
+      null,
+    );
   }
 
   if (
@@ -39,6 +51,7 @@ export const validateRegistrationCredentials = (username, email, password) => {
       400,
       "INVALID_CREDENTIALS",
       "Password is not strong enough.",
+      null,
     );
   }
 };

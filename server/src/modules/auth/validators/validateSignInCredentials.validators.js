@@ -6,6 +6,7 @@ export const validateSignInCredentials = async (username, password) => {
       400,
       "INVALID_CREDENTIALS",
       "All fields are required.",
+      null,
     );
   }
 };

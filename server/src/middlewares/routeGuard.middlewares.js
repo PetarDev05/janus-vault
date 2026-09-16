@@ -1,6 +1,5 @@
 import APIError from "../utils/APIError.utils.js";
 import jwt from "jsonwebtoken";
-import TokenExpiredError from "jsonwebtoken";
 import { validateId } from "../modules/auth/validators/validateId.validators.js";
 
 export const routeGuard = async (req, res, next) => {
@@ -10,7 +9,7 @@ export const routeGuard = async (req, res, next) => {
 
     // check if content exists
     if (!authorization || typeof authorization !== "string") {
-      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.");
+      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.", null);
     }
 
     // extract Bearer and token from authorization header contents
@@ -18,7 +17,7 @@ export const routeGuard = async (req, res, next) => {
 
     // check if all extracted values are viable
     if (!bearer || bearer !== "Bearer" || !accessToken) {
-      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.");
+      throw new APIError(401, "AUTHORIZATION_ERROR", "Access denied.", null);
     }
 
     // validate token and decode user id from it

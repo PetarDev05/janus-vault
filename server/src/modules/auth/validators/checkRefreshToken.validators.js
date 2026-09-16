@@ -11,6 +11,6 @@ export const checkRefreshToken = (refreshToken, flag) => {
         "Unable to delete account due to session expiration. Please sign in again.";
     }
 
-    throw new APIError(401, "TOKEN_EXPIRED", message);
+    throw new APIError(401, "TOKEN_EXPIRED", message, "SIGN_OUT");
   }
 };

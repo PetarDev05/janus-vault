@@ -31,6 +31,7 @@ userSchema.statics.isUsernameInUse = async function (username) {
       409,
       "USER_ALREADY_EXISTS",
       "This username is already in use.",
+      null,
     );
   }
 };
@@ -42,6 +43,7 @@ userSchema.statics.isEmailInUse = async function (email) {
       409,
       "USER_ALREADY_EXISTS",
       "This email is already in use.",
+      null,
     );
   }
 };
@@ -69,6 +71,7 @@ userSchema.statics.findUserByUsername = async function (username) {
       404,
       "USER_NOT_FOUND",
       "Account is not found. Check your sign in credentials.",
+      null,
     );
   }
   return existingUser;
@@ -84,6 +87,7 @@ userSchema.statics.findUserById = async function (userID) {
       404,
       "USER_NOT_FOUND",
       "User not found. Please sign in again.",
+      "SIGN_OUT",
     );
   }
 
