@@ -1,9 +1,10 @@
 import { httpRequestHandler } from "../handlers/httpRequestHandler.handlers.js";
+import { setAccessToken } from "../storage/accessTokenStorage.storage.js";
 import {
   getRefreshPromise,
   removeRefreshPromise,
   setRefreshPromise,
-} from "../storage/refreshPromise.storage.js";
+} from "../storage/refreshPromiseStorage.storage.js";
 
 export const fetchWrapper = async (
   isAuthenticated,
@@ -65,6 +66,7 @@ export const fetchWrapper = async (
     }
 
     removeRefreshPromise();
+    setAccessToken(refreshResponse.data.accessToken);
 
     const retryResponse = await originalPromise;
 

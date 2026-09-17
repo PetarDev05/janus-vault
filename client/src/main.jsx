@@ -1,13 +1,16 @@
 // import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './styles/index.css'
-import App from './App.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AuthLayout from './layouts/AuthLayout.layouts.jsx';
-import SignUp from './pages/SignUp.pages.jsx';
-import SignIn from './pages/SignIn.pages.jsx';
-import UserLayout from './layouts/UserLayout.layouts.jsx';
-import Dashboard from './pages/Dashboard.pages.jsx';
+import { createRoot } from "react-dom/client";
+import "./styles/index.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthLayout from "./layouts/AuthLayout.layouts.jsx";
+import SignUp from "./pages/SignUp.pages.jsx";
+import SignIn from "./pages/SignIn.pages.jsx";
+import UserLayout from "./layouts/UserLayout.layouts.jsx";
+import Dashboard from "./pages/Dashboard.pages.jsx";
+import GlobalContextProvider from "./context/global/GlobalContextProvider.context.jsx";
+import AuthContextProvider from "./context/auth/AuthContextProvider.context.jsx";
+import DataContextProvider from "./context/data/DataContextProvider.context.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,8 +44,14 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   // <StrictMode>
-    <RouterProvider router={router} />
+  <GlobalContextProvider>
+    <AuthContextProvider>
+      <DataContextProvider>
+        <RouterProvider router={router} />
+      </DataContextProvider>
+    </AuthContextProvider>
+  </GlobalContextProvider>,
   // </StrictMode>,
-)
+);

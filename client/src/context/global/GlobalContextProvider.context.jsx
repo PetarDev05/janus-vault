@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { GlobalContext } from "./GlobalContext.context.jsx";
+import { toast } from "react-hot-toast";
 
 const GlobalContextProvider = ({ children }) => {
-  const [error, setError] = useState(null);
+  const [httpError, setHttpError] = useState(null);
   const [theme, setTheme] = useState("light");
 
   const html = document.documentElement;
@@ -15,11 +16,33 @@ const GlobalContextProvider = ({ children }) => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
+  const notify = (message, flag) => {
+    if (flag === "S") {
+      toast.success(message);
+    } else if (flag === "F") {
+      toast.error(message);
+    } else {
+      toast(message);
+    }
+  };
+
+  const handleError = (error) => {
+    notify(error.message, "F");
+    setHttpError(error);
+  };
+
+  const handleSuccess = (message) => {
+    notify(message, "S");
+  };
+
   const value = {
-    error,
-    setError,
+    httpError,
+    setHttpError,
     theme,
     switchTheme,
+    notify,
+    handleError,
+    handleSuccess,
   };
 
   return (
