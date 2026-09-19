@@ -24,7 +24,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const renewSession = async () => {
       const response = await fetchWrapper(
-        state.user === null,
+        (state.user === null),
         "user",
         "refresh",
         "",
@@ -36,7 +36,7 @@ const AuthContextProvider = ({ children }) => {
 
       if (response.success) {
         const { data } = response;
-        handleSuccess(`Welcome back ${data.user.username}`); // ovo mozda i obrisi
+        handleSuccess(`Welcome back ${data.user.username}`); // ovo mozda i obrisi, ali samo odavde
         dispatch({ type: "SET_USER", payload: data });
         setAccessToken(data.accessToken);
       }

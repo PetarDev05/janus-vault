@@ -16,11 +16,8 @@ export const registerUser = async (req, res, next) => {
     checkForExistingUser(username, email);
 
     // create new user account
-    const { newUser, accessToken, refreshTokenPlain } = await registrationService(
-      username,
-      email,
-      password,
-    );
+    const { newUser, accessToken, refreshTokenPlain } =
+      await registrationService(username, email, password);
 
     // save refresh token to the HTTP-only cookie
     res.cookie("refreshToken", refreshTokenPlain, {

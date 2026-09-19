@@ -3,36 +3,36 @@ import { Link } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Logo from "../global/units/Logo.components";
-// import { useHandleAuthAction } from "../hooks/useHandleAuthAction.hooks.jsx";
+import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 
 const SignInForm = () => {
-  // const handleAuthAction = useHandleAuthAction();
+  const httpRequest = useHttpRequest();
 
-  // const [input, setInput] = useState({
-  //   username: "",
-  //   password: "",
-  // });
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
 
   const [visibility, setVisibility] = useState(false);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   await handleAuthAction("POST", "sign_in", "in", input, "");
-  // };
+    await httpRequest("user", "sign_in", "", "POST", input, false, true);
+  };
 
   return (
     <form
       className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) rounded-xl bg-transparent backdrop-blur-xl shadow"
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <Logo />
-      
+
       <p className="text-(--text-light) text-lg dark:text-(--text-dark) mb-3">
         Sign in to an existing account
       </p>
@@ -46,8 +46,8 @@ const SignInForm = () => {
         id="username-sign-in"
         name="username"
         type="text"
-        // value={input.username}
-        // onChange={handleChange}
+        value={input.username}
+        onChange={handleChange}
         placeholder="John Doe"
         className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
@@ -61,8 +61,8 @@ const SignInForm = () => {
         <input
           name="password"
           type={visibility ? "text" : "password"}
-          // value={input.password}
-          // onChange={handleChange}
+          value={input.password}
+          onChange={handleChange}
           placeholder="\/**+**\/"
           className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
         />

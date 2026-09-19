@@ -30,6 +30,8 @@ export const useHttpRequest = () => {
       needCredentials,
     );
 
+    console.log(response); // ovo obrisi kasnije
+
     if (!response.success) {
       handleError(response);
 

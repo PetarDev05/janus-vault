@@ -4,7 +4,10 @@ import { toast } from "react-hot-toast";
 
 const GlobalContextProvider = ({ children }) => {
   const [httpError, setHttpError] = useState(null);
+
   const [theme, setTheme] = useState("light");
+  const [menu, setMenu] = useState(false);
+  const [settings, setSettings] = useState(false);
 
   const html = document.documentElement;
 
@@ -43,6 +46,10 @@ const GlobalContextProvider = ({ children }) => {
     notify,
     handleError,
     handleSuccess,
+    menu,
+    setMenu,
+    settings,
+    setSettings,
   };
 
   return (

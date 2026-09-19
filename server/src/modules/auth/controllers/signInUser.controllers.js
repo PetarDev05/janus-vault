@@ -15,7 +15,7 @@ export const signInUser = async (req, res, next) => {
     const { existingUser, accessToken, refreshTokenPlain } =
       await signInService(username, password);
 
-    // save refresh token to the HTTP-only cookie
+    // save refresh token to the HTTP-only cookie`
     res.cookie("refreshToken", refreshTokenPlain, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

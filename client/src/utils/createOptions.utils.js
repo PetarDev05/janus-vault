@@ -1,6 +1,6 @@
 import { getAccessToken } from "../storage/accessTokenStorage.storage.js";
 
-export const createOptions = async (
+export const createOptions = (
   method = "GET",
   body,
   needAuth,
@@ -25,4 +25,6 @@ export const createOptions = async (
   if (needCredentials) {
     options.credentials = "include";
   }
+
+  return options;
 };

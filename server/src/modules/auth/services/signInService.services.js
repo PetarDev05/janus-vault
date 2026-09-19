@@ -1,5 +1,5 @@
 import User from "../models/user.models.js";
-import Session from "../models/session.models.js"
+import Session from "../models/session.models.js";
 import { generateAccessToken } from "../utils/generateAccessToken.utils.js";
 import { generateRefreshToken } from "../utils/generateRefreshToken.utils.js";
 import { validatePassword } from "../validators/validatePassword.validators.js";

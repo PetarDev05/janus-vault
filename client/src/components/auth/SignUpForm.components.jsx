@@ -2,34 +2,34 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Logo from "../global/units/Logo.components";
-// import { useHandleAuthAction } from "../hooks/useHandleAuthAction.hooks.jsx";
+import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 
 const SignUpForm = () => {
-  // const handleAuthAction = useHandleAuthAction();
+  const httpRequest = useHttpRequest();
 
-  // const [input, setInput] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  // });
+  const [input, setInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const [visibility, setVisibility] = useState(false);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   await handleAuthAction("POST", "register", "in", input, "");
-  // };
+    await httpRequest("user", "register", "", "POST", input, false, true);
+  };
 
   return (
     <form
       className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) bg-transparent rounded-xl backdrop-blur-xl shadow"
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <Logo />
       {/* <h2 className="text-(--heading-light) dark:text-(--heading-dark) font-semibold text-2xl">
@@ -48,8 +48,8 @@ const SignUpForm = () => {
         id="username-sign-up"
         name="username"
         type="text"
-        // value={input.username}
-        // onChange={handleInputChange}
+        value={input.username}
+        onChange={handleInputChange}
         placeholder="John Doe"
         className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
@@ -63,8 +63,8 @@ const SignUpForm = () => {
         id="email-sign-up"
         name="email"
         type="email"
-        // value={input.email}
-        // onChange={handleInputChange}
+        value={input.email}
+        onChange={handleInputChange}
         placeholder="john@gmail.com"
         className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
@@ -78,8 +78,8 @@ const SignUpForm = () => {
         <input
           name="password"
           type={visibility ? "text" : "password"}
-          // value={input.password}
-          // onChange={handleInputChange}
+          value={input.password}
+          onChange={handleInputChange}
           placeholder="\/**+**\/"
           className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
         />
