@@ -2,9 +2,12 @@ import ThemeSwitcher from "./ThemeSwitcher.components.jsx";
 import { useHttpRequest } from "../../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "../../../hooks/context_hooks/useGlobalContext.hooks.jsx";
+import { useAuthContext } from "../../../hooks/context_hooks/useAuthContext.hooks.jsx";
+import { RiLoader2Fill } from "react-icons/ri";
 
 const SettingsWindow = () => {
   const { setSettings } = useGlobalContext();
+  const { authLoading } = useAuthContext();
   const httpRequest = useHttpRequest();
 
   const signOut = async () => {
@@ -16,7 +19,7 @@ const SettingsWindow = () => {
   };
 
   return (
-    <div className="absolute -left-1 -bottom-1 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
+    <div className="absolute -left-1 bottom-9 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
       <div className="w-full flex flex-row items-center justify-between">
         <h2 className="text-(--primary) text-lg">Settings</h2>
         <span
@@ -35,9 +38,13 @@ const SettingsWindow = () => {
         <p className="text-(--text-light) text-sm">Remove current session</p>
         <button
           onClick={signOut}
-          className="px-3 py-1.5 text-sm text-(--white) rounded-md bg-(--sign-out-orange)/90 cursor-pointer"
+          className="px-3 py-1.5 text-sm text-(--white) rounded-md bg-(--sign-out-orange)/90 cursor-pointer flex items-center justify-center"
         >
-          Sign out
+          {authLoading === "sign_out" ? (
+            <RiLoader2Fill className="animate-spin text-lg" />
+          ) : (
+            "Sign out"
+          )}
         </button>
       </div>
       <hr className="w-full text-(--text-light)/40" />
@@ -47,9 +54,13 @@ const SettingsWindow = () => {
         </p>
         <button
           onClick={deleteAccount}
-          className="px-3 py-1.5 text-sm text-(--white) rounded-md bg-(--delete-red)/90 cursor-pointer"
+          className="px-3 py-1.5 text-sm text-(--white) rounded-md bg-(--delete-red)/90 cursor-pointer flex items-center justify-center"
         >
-          Remove Account
+          {authLoading === "delete" ? (
+            <RiLoader2Fill className="animate-spin text-lg" />
+          ) : (
+            "Remove account"
+          )}
         </button>
       </div>
     </div>

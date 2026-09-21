@@ -19,7 +19,7 @@ const Sidebar = () => {
           <p className="text-[10px]">Profile</p>
         </span>
       </div>
-      <div className="relative cursor-pointer transition-all duration-300 flex flex-row items-center gap-5">
+      <div className="relative cursor-pointer transition-all duration-300 flex flex-row items-center gap-5 pb-10">
         <span
           onClick={() => setSettings((prev) => !prev)}
           className={`w-full flex flex-col items-center gap-2 p-3 rounded-lg text-2xl text-(--text-light) ${!settings ? "hover:bg-(--primary)/50 hover:text-(--white)" : ""} z-18 transition-all duration-300`}

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { AuthContext } from "./AuthContext.context.jsx";
 import { fetchWrapper } from "../../services/fetchWrapper.services.js";
 import { useGlobalContext } from "../../hooks/context_hooks/useGlobalContext.hooks.jsx";
@@ -21,10 +21,15 @@ const AuthContextProvider = ({ children }) => {
     user: null,
   });
 
+  const [authLoading, setAuthLoading] = useState("");
+  const [authStatus, setAuthStatus] = useState("initializing");
+
   useEffect(() => {
     const renewSession = async () => {
+      setAuthLoading("refresh");
+
       const response = await fetchWrapper(
-        (state.user === null),
+        state.user === null,
         "user",
         "refresh",
         "",
@@ -39,7 +44,12 @@ const AuthContextProvider = ({ children }) => {
         handleSuccess(`Welcome back ${data.user.username}`); // ovo mozda i obrisi, ali samo odavde
         dispatch({ type: "SET_USER", payload: data });
         setAccessToken(data.accessToken);
+        setAuthStatus("authenticated");
+      } else {
+        setAuthStatus("unauthenticated");
       }
+
+      setAuthLoading("");
     };
 
     renewSession();
@@ -48,6 +58,10 @@ const AuthContextProvider = ({ children }) => {
   const value = {
     ...state,
     dispatchUser: dispatch,
+    authLoading,
+    setAuthLoading,
+    authStatus,
+    setAuthStatus,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

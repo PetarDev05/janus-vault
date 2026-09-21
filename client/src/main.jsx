@@ -11,12 +11,14 @@ import Dashboard from "./pages/Dashboard.pages.jsx";
 import GlobalContextProvider from "./context/global/GlobalContextProvider.context.jsx";
 import AuthContextProvider from "./context/auth/AuthContextProvider.context.jsx";
 import DataContextProvider from "./context/data/DataContextProvider.context.jsx";
+import IndexRouteGuard from "./components/routes/IndexRouteGuard.components.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      { index: true, element: <IndexRouteGuard /> },
       {
         element: <AuthLayout />,
         children: [

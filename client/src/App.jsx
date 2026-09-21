@@ -4,18 +4,22 @@ import { Toaster } from "react-hot-toast";
 import Sidebar from "./components/sidebar/Sidebar.components.jsx";
 import SidebarMobile from "./components/sidebar/SideBarMobile.components.jsx";
 import SearchMenu from "./components/header/units/SearchMenu.components.jsx";
-// import { useAuthContext } from "./hooks/context_hooks/useAuthContext.hooks.jsx";
+import { useAuthContext } from "./hooks/context_hooks/useAuthContext.hooks.jsx";
+import GlobalLoadingScreen from "./components/global/units/GlobalLoadingScreen.components.jsx";
 
 const App = () => {
-  // const { user } = useAuthContext();
+  const { user, authStatus } = useAuthContext();
+
+  if (authStatus === "initializing") {
+    return <GlobalLoadingScreen />;
+  }
 
   return (
     <main className="w-full min-h-screen bg-(--bg-light-primary) dark:bg-(--bg-dark-primary)">
-      {/* {user && <Header />} */}
-      <Header />
-      <Sidebar />
-      <SidebarMobile />
-      <SearchMenu />
+      {user && <Header />}
+      {user && <Sidebar />}
+      {user && <SidebarMobile />}
+      {user && <SearchMenu />}
       <Outlet />
       <Toaster
         toastOptions={{

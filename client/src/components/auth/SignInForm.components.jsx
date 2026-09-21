@@ -4,9 +4,12 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Logo from "../global/units/Logo.components";
 import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
+import { useAuthContext } from "../../hooks/context_hooks/useAuthContext.hooks.jsx";
+import { RiLoader2Fill } from "react-icons/ri";
 
 const SignInForm = () => {
   const httpRequest = useHttpRequest();
+  const { authLoading } = useAuthContext();
 
   const [input, setInput] = useState({
     username: "",
@@ -24,6 +27,11 @@ const SignInForm = () => {
     e.preventDefault();
 
     await httpRequest("user", "sign_in", "", "POST", input, false, true);
+
+    setInput({
+      username: "",
+      password: "",
+    });
   };
 
   return (
@@ -33,7 +41,7 @@ const SignInForm = () => {
     >
       <Logo />
 
-      <p className="text-(--text-light) text-lg dark:text-(--text-dark) mb-3">
+      <p className="text-(--text-light) text-center text-lg dark:text-(--text-dark) mb-3">
         Sign in to an existing account
       </p>
       <label
@@ -76,10 +84,14 @@ const SignInForm = () => {
       {/* <p className="w-full text-(--primary)  text-end cursor-pointer">
         Forgot password?
       </p> */}
-      <button className="w-full py-2 bg-(--primary) rounded-full text-(--white) font-semibold cursor-pointer mt-5">
-        Sign in
+      <button className="w-full py-2 bg-(--primary) rounded-full text-(--white) font-semibold cursor-pointer mt-5 h-10 flex items-center justify-center">
+        {authLoading === "sign_in" ? (
+          <RiLoader2Fill className="animate-spin text-xl" />
+        ) : (
+          "Sign in"
+        )}
       </button>
-      <p className="text-(--text-light) dark:text-(--text-dark)">
+      <p className="text-center text-(--text-light) dark:text-(--text-dark)">
         Don't have an account?{" "}
         <Link to="/sign_up" className="text-(--primary) cursor-pointer ">
           Sign up

@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Logo from "../global/units/Logo.components";
 import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
+import { RiLoader2Fill } from "react-icons/ri";
+import { useAuthContext } from "../../hooks/context_hooks/useAuthContext.hooks.jsx";
 
 const SignUpForm = () => {
   const httpRequest = useHttpRequest();
+  const { authLoading } = useAuthContext();
 
   const [input, setInput] = useState({
     username: "",
@@ -24,6 +27,8 @@ const SignUpForm = () => {
     e.preventDefault();
 
     await httpRequest("user", "register", "", "POST", input, false, true);
+
+    setInput({ username: "", email: "", password: "" });
   };
 
   return (
@@ -35,7 +40,7 @@ const SignUpForm = () => {
       {/* <h2 className="text-(--heading-light) dark:text-(--heading-dark) font-semibold text-2xl">
         Sign up
       </h2> */}
-      <p className="text-(--text-light) text-lg dark:text-(--text-dark) mb-3">
+      <p className="text-(--text-light) text-center text-lg dark:text-(--text-dark) mb-3">
         Create your personal account
       </p>
       <label
@@ -90,10 +95,14 @@ const SignUpForm = () => {
           {visibility ? <FaRegEye /> : <FaRegEyeSlash />}
         </span>
       </div>
-      <button className="w-full py-2 bg-(--primary) rounded-full text-(--white) font-semibold cursor-pointer mt-5">
-        Sign up
+      <button className="w-full py-2 bg-(--primary) rounded-full text-(--white) font-semibold cursor-pointer mt-5 h-10 flex items-center justify-center">
+        {authLoading === "sign_up" ? (
+          <RiLoader2Fill className="animate-spin text-xl" />
+        ) : (
+          "Sign up"
+        )}
       </button>
-      <p className="text-(--text-light) dark:text-(--text-dark)">
+      <p className="text-center text-(--text-light) dark:text-(--text-dark)">
         Already have an account?{" "}
         <Link to="/sign_in" className="text-(--primary) cursor-pointer">
           Sign in
