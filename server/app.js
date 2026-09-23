@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { routeInspector } from "./src/middlewares/routeInspector.middlewares.js";
 import { errorHandler } from "./src/middlewares/errorHandler.middlewares.js";
 import { userRouter } from "./src/modules/auth/routes/userRouter.routes.js";
+import { dataRouter } from "./src/modules/data/routes/dataRouter.routes.js";
 
 export const app = express();
 
@@ -24,5 +25,6 @@ app.use(cookieParser());
 app.use(routeInspector);
 
 app.use("/api/user", userRouter);
+app.use("/api/data", dataRouter);
 
 app.use(errorHandler);

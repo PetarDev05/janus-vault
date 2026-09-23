@@ -1,6 +1,6 @@
 import APIError from "../utils/APIError.utils.js";
 import jwt from "jsonwebtoken";
-import { validateId } from "../modules/auth/validators/validateId.validators.js";
+import { validateID } from "../validators/validateID.validators.js";
 
 export const routeGuard = async (req, res, next) => {
   try {
@@ -21,13 +21,13 @@ export const routeGuard = async (req, res, next) => {
     }
 
     // validate token and decode user id from it
-    const { userId } = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+    const { userID } = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
 
     // validate user id
-    validateId(userId);
+    validateID(userID);
 
-    // save userId inside req.userId for later consumption
-    req.userId = userId;
+    // save userID inside req.userID for later consumption
+    req.userID = userID;
 
     // forward to the next piece of middleware
     next();
