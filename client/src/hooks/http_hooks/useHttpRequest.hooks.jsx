@@ -7,7 +7,8 @@ import { useAuthContext } from "../context_hooks/useAuthContext.hooks.jsx";
 import { useGlobalContext } from "../context_hooks/useGlobalContext.hooks.jsx";
 
 export const useHttpRequest = () => {
-  const { user, dispatchUser, setAuthLoading, setAuthStatus } = useAuthContext();
+  const { user, dispatchUser, setAuthLoading, setAuthStatus } =
+    useAuthContext();
   const { handleError, handleSuccess } = useGlobalContext();
   // ovde moras da uvezes i dataLoading, zato sto moze biti jedan ili drugi, pa ti shodno tome trebaju dva uvezena loading state-a.
 
@@ -67,8 +68,6 @@ export const useHttpRequest = () => {
     }
 
     // ovde pravis dispatch "switch" koji ce da pronadje odgovarajucu akciju u data modulu i da je dispatch-uje.
-
-    
   };
 
   return httpRequest;

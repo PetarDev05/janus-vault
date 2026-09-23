@@ -8,6 +8,10 @@ const GlobalContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const [menu, setMenu] = useState(false);
   const [settings, setSettings] = useState(false);
+  const [creationWindow, setCreationWindow] = useState(false);
+  const [profileWindow, setProfileWindow] = useState(false);
+  const [categoryWindow, setCategoryWindow] = useState(false);
+  const [secretWindow, setSecretWindow] = useState(false);
 
   const html = document.documentElement;
 
@@ -50,6 +54,14 @@ const GlobalContextProvider = ({ children }) => {
     setMenu,
     settings,
     setSettings,
+    creationWindow,
+    setCreationWindow,
+    profileWindow,
+    setProfileWindow,
+    categoryWindow,
+    setCategoryWindow,
+    secretWindow,
+    setSecretWindow,
   };
 
   return (

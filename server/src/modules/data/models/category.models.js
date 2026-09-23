@@ -54,4 +54,8 @@ categorySchema.statics.findCategoryIDByName = async function (
   return category._id;
 };
 
+categorySchema.statics.deleteAllCategories = async function (userID) {
+  await this.deleteMany({ userID });
+};
+
 export default model("Category", categorySchema);

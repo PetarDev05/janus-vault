@@ -46,7 +46,13 @@ secretSchema.statics.createSecret = async function (
   name,
   fields,
 ) {
-  const newSecret = await this.create({ userID, categoryID, categoryName, name, fields });
+  const newSecret = await this.create({
+    userID,
+    categoryID,
+    categoryName,
+    name,
+    fields,
+  });
   return newSecret;
 };
 
@@ -62,6 +68,10 @@ secretSchema.statics.findSecretByID = async function (userID, secretID) {
   }
 
   return secret;
+};
+
+secretSchema.statics.deleteAllSecrets = async function (userID) {
+  await this.deleteMany({ userID });
 };
 
 export default model("Secret", secretSchema);
