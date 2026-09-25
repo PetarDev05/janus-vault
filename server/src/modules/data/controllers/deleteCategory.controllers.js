@@ -12,7 +12,7 @@ export const deleteCategory = async (req, res, next) => {
     //send response
     const response = new APIResponse(
       200,
-      null,
+      { categoryID },
       "Category deleted successfully.",
     );
 

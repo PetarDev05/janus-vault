@@ -1,5 +1,9 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { DataContext } from "./DataContext.context.jsx";
+import { useAuthContext } from "../../hooks/context_hooks/useAuthContext.hooks.jsx";
+import { fetchWrapper } from "../../services/fetchWrapper.services.js";
+import { useGlobalContext } from "../../hooks/context_hooks/useGlobalContext.hooks.jsx";
+import { getAccessToken } from "../../storage/accessTokenStorage.storage.js";
 
 const dataReducer = ({ secrets, categories }, { type, payload }) => {
   switch (type) {
@@ -8,21 +12,26 @@ const dataReducer = ({ secrets, categories }, { type, payload }) => {
     case "CREATE_NEW_CATEGORY":
       return {
         secrets,
-        categories: [...categories, payload.newCategory],
+        categories: [...categories, payload],
       };
     case "CREATE_NEW_SECRET":
       return {
-        secrets: [...secrets, payload.newSecret],
+        secrets: [...secrets, payload],
         categories,
       };
     case "DELETE_CATEGORY":
       return {
         secrets,
-        categories: categories.filter((c) => c !== payload.category),
+        categories: categories.filter((c) => c._id !== payload),
       };
     case "DELETE_SECRET":
       return {
-        secrets: secrets.filter((s) => s._id !== payload.secret._id),
+        secrets: secrets.filter((s) => s._id !== payload),
+        categories,
+      };
+    case "UPDATE_SECRET":
+      return {
+        secrets: secrets.map((s) => (s._id === payload._id ? payload : s)),
         categories,
       };
     default:
@@ -31,10 +40,44 @@ const dataReducer = ({ secrets, categories }, { type, payload }) => {
 };
 
 const DataContextProvider = ({ children }) => {
+  const { handleError } = useGlobalContext();
+  const { authStatus } = useAuthContext();
+
   const [state, dispatch] = useReducer(dataReducer, {
-    secrets: null,
-    categories: null,
+    secrets: [],
+    categories: [],
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (
+        authStatus === "intializing" ||
+        authStatus === "unauthenticated" ||
+        !getAccessToken()
+      ) {
+        return;
+      }
+
+      const response = await fetchWrapper(
+        authStatus === "authenticated",
+        "data",
+        "all",
+        "",
+        "GET",
+        null,
+        true,
+        false,
+      );
+
+      if (response.success) {
+        dispatch({ type: "FETCH_DATA", payload: response.data });
+      } else {
+        handleError(response);
+      }
+    };
+
+    fetchData();
+  }, [authStatus]);
 
   const value = {
     ...state,

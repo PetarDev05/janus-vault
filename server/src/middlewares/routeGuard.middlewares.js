@@ -21,6 +21,7 @@ export const routeGuard = async (req, res, next) => {
     }
 
     // validate token and decode user id from it
+    // ovde razmisli da li da svaki zahtev salje refresh token, jer u slucaju da data zahtev nema access token ili da je menjan, nemas nacin da izbacis korisnika iz sistema, ako nemas refresh token
     const { userID } = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
 
     // validate user id

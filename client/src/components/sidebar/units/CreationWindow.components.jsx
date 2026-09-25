@@ -1,8 +1,11 @@
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "../../../hooks/context_hooks/useGlobalContext.hooks.jsx";
+import { useDataContext } from "../../../hooks/context_hooks/useDataContext.hooks.jsx";
 
 const CreationWindow = () => {
-  const { setCreationWindow, setCategoryWindow } = useGlobalContext();
+  const { setCreationWindow, setCategoryWindow, setSecretWindow } =
+    useGlobalContext();
+  const { categories } = useDataContext();
 
   return (
     <div className="absolute left-1/2 -bottom-1 max-[500px]:-translate-x-1/2 min-[500px]:-left-1 min-[500px]:-top-1 p-1  min-[500px]:pt-20 max-[500px]:pb-20 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl z-15 flex flex-col items-center gap-1">
@@ -13,8 +16,11 @@ const CreationWindow = () => {
         <IoClose />
       </span>
       <div
-        onClick={() => setCreationWindow((prev) => !prev)}
-        className="w-full px-5 min-[500px]:px-10 py-1.5 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) text-nowrap text-center text-(--text-light) text-sm hover:bg-(--primary)/70 hover:text-(--white) transition-all duration-300 cursor-pointer "
+        onClick={() => {
+          categories.length && setCreationWindow((prev) => !prev);
+          categories.length && setSecretWindow((prev) => !prev);
+        }}
+        className={`w-full px-5 min-[500px]:px-10 py-1.5 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) text-nowrap text-center text-(--text-light) text-sm ${categories.length ? "hover:bg-(--primary)/70 hover:text-(--white)" : "opacity-60"}  transition-all duration-300 cursor-pointer `}
       >
         New Secret
       </div>

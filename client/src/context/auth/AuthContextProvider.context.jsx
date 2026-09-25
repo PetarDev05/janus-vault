@@ -27,9 +27,8 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const renewSession = async () => {
       setAuthLoading("refresh");
-
       const response = await fetchWrapper(
-        state.user === null,
+        authStatus === "authenticated",
         "user",
         "refresh",
         "",

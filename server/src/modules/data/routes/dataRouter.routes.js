@@ -11,7 +11,8 @@ export const dataRouter = Router();
 
 dataRouter.use(routeGuard);
 dataRouter.route("/all").get(fetchAllData);
-dataRouter.route("/category").post(createCategory);
-dataRouter.route("/category/:categoryID").delete(deleteCategory);
-dataRouter.route("/secret").post(createNewSecret);
-dataRouter.route("/secret/:secretID").delete(deleteSecret).patch(updateSecret);
+dataRouter.route("/create_category").post(createCategory);
+dataRouter.route("/delete_category/:categoryID").delete(deleteCategory);
+dataRouter.route("/create_secret").post(createNewSecret);
+dataRouter.route("/delete_secret/:secretID").delete(deleteSecret);
+dataRouter.route("/update_secret/:secretID").patch(updateSecret);

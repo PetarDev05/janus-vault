@@ -4,11 +4,13 @@ import {
   setAccessToken,
 } from "../../storage/accessTokenStorage.storage.js";
 import { useAuthContext } from "../context_hooks/useAuthContext.hooks.jsx";
+import { useDataContext } from "../context_hooks/useDataContext.hooks.jsx";
 import { useGlobalContext } from "../context_hooks/useGlobalContext.hooks.jsx";
 
 export const useHttpRequest = () => {
   const { user, dispatchUser, setAuthLoading, setAuthStatus } =
     useAuthContext();
+  const { dispatchData } = useDataContext();
   const { handleError, handleSuccess } = useGlobalContext();
   // ovde moras da uvezes i dataLoading, zato sto moze biti jedan ili drugi, pa ti shodno tome trebaju dva uvezena loading state-a.
 
@@ -37,20 +39,21 @@ export const useHttpRequest = () => {
 
     if (!response.success) {
       handleError(response);
-
+      
       if (response.action === "SIGN_OUT") {
         dispatchUser({ type: "REMOVE_USER" });
         removeAccessToken();
         setAuthStatus("unauthenticated");
       }
-
+      
       if (type === "user" && service !== "refresh") {
+        dispatchUser({ type: "REMOVE_USER" });
         setAuthStatus("unauthenticated");
       }
 
       return;
     }
-
+    
     handleSuccess(response.message);
 
     if (type === "user") {
@@ -65,9 +68,45 @@ export const useHttpRequest = () => {
       }
 
       return;
+    } else {
+      switch (service) {
+        case "all":
+          dispatchData({ type: "FETCH_DATA", payload: response.data });
+          break;
+        case "create_category":
+          dispatchData({
+            type: "CREATE_NEW_CATEGORY",
+            payload: response.data.newCategory,
+          });
+          break;
+        case "delete_category":
+          dispatchData({
+            type: "DELETE_CATEGORY",
+            payload: response.data.categoryID,
+          });
+          break;
+        case "create_secret":
+          dispatchData({
+            type: "CREATE_NEW_SECRET",
+            payload: response.data.newSecret,
+          });
+          break;
+        case "delete_secret":
+          dispatchData({
+            type: "DELETE_SECRET",
+            payload: response.data.secretID,
+          });
+          break;
+        case "update_secret":
+          dispatchData({
+            type: "UPDATE_SECRET",
+            payload: response.data.updatedSecret,
+          });
+          break;
+        default:
+          break;
+      }
     }
-
-    // ovde pravis dispatch "switch" koji ce da pronadje odgovarajucu akciju u data modulu i da je dispatch-uje.
   };
 
   return httpRequest;

@@ -8,11 +8,11 @@ export const fetchAllData = async (req, res, next) => {
     const userID = req.userID;
 
     // fetch data
-    const categories = await Category.find({ userID });
     const secrets = await Secret.find({ userID });
+    const categories = await Category.find({ userID });
 
     // send response
-    const response = new APIResponse(200, { categories, secrets }, "");
+    const response = new APIResponse(200, { secrets, categories }, "");
     res.status(response.statusCode).json(response);
   } catch (error) {
     next(error);

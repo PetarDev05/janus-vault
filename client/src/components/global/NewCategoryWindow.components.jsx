@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useGlobalContext } from "../../../hooks/context_hooks/useGlobalContext.hooks.jsx";
-import { useHttpRequest } from "../../../hooks/http_hooks/useHttpRequest.hooks.jsx";
+import { useGlobalContext } from "../../hooks/context_hooks/useGlobalContext.hooks.jsx";
+import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 
 const NewCategoryWindow = () => {
   const { setCategoryWindow } = useGlobalContext();
@@ -15,7 +15,7 @@ const NewCategoryWindow = () => {
   const createNewCategory = async () => {
     await httpRequest(
       "data",
-      "category",
+      "create_category",
       "",
       "POST",
       { categoryName },

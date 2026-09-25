@@ -15,7 +15,11 @@ export const deleteSecret = async (req, res, next) => {
     await Secret.deleteSecret(userID, secretID);
 
     //send response
-    const response = new APIResponse(200, null, "Secret deleted successfully.");
+    const response = new APIResponse(
+      200,
+      { secretID },
+      "Secret deleted successfully.",
+    );
 
     res.status(response.statusCode).json(response);
   } catch (error) {
