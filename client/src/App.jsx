@@ -11,7 +11,7 @@ import { useGlobalContext } from "./hooks/context_hooks/useGlobalContext.hooks.j
 
 const App = () => {
   const { user, authStatus } = useAuthContext();
-  const { categoryWindow, secretWindow } = useGlobalContext();
+  const { categoryWindow, secretWindow, secretIDUpdateWindow } = useGlobalContext();
 
   if (authStatus === "initializing") {
     return <GlobalLoadingScreen />;
@@ -23,7 +23,7 @@ const App = () => {
       {user && <Sidebar />}
       {user && <SidebarMobile />}
       {user && <SearchMenu />}
-      {(categoryWindow || secretWindow) && <FaintLayer />}
+      {(categoryWindow || secretWindow || secretIDUpdateWindow) && <FaintLayer />}
       <Outlet />
       <Toaster
         toastOptions={{

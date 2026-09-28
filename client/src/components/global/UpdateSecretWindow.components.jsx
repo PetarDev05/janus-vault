@@ -1,29 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../hooks/context_hooks/useGlobalContext.hooks.jsx";
 import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 import { useDataContext } from "../../hooks/context_hooks/useDataContext.hooks.jsx";
-import SecretFields from "./units/SecretFields.components.jsx";
 import { RiLoader2Fill } from "react-icons/ri";
+import UpdateSecretFields from "./units/UpdateSecretFields.components.jsx";
 
-const NewSecretWindow = () => {
-  const { setSecretWindow } = useGlobalContext();
-  const { categories, dataLoading } = useDataContext();
+const UpdateSecretWindow = () => {
+  const { secretIDUpdateWindow, setSecretIDUpdateWindow } = useGlobalContext();
+  const { categories, secrets, dataLoading } = useDataContext();
+  // find secret by id
+  const targetSecret = secrets.find((s) => s._id === secretIDUpdateWindow);
   const httpRequest = useHttpRequest();
-  const [idx, setIdx] = useState(0);
-  const [secretData, setSecretData] = useState({
+  const [updateSecretData, setUpdateSecretData] = useState({
     categoryName: "",
     name: "",
     fields: [],
   });
   const [field, setField] = useState({
-    index: 0,
     key: "",
     value: "",
   });
 
+  useEffect(() => {
+    function changeState() {
+      if (targetSecret) {
+        setUpdateSecretData(targetSecret);
+      }
+    }
+
+    changeState();
+  }, [targetSecret]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSecretData({ ...secretData, [name]: value });
+    setUpdateSecretData({ ...updateSecretData, [name]: value });
   };
 
   const handleFieldChange = (e) => {
@@ -36,52 +46,55 @@ const NewSecretWindow = () => {
       return;
     }
 
-    let newField = { ...field, index: idx };
-    setIdx(idx + 1);
+    let newFields = [...updateSecretData.fields];
+    newFields.push(field);
 
-    const newFields = [...secretData.fields];
-    newFields.push(newField);
-    setSecretData({ ...secretData, fields: newFields });
+    setUpdateSecretData({ ...updateSecretData, fields: newFields });
     setField({
-      index: 0,
       key: "",
       value: "",
     });
   };
 
   const removeField = (index) => {
-    let fields = [...secretData.fields];
-    const filtered = fields.filter((f) => f.index !== index);
-    setSecretData({ ...secretData, fields: filtered });
+    let fields = [...updateSecretData.fields];
+    let filtered = fields.filter((f) => f._id !== index);
+    setUpdateSecretData({ ...updateSecretData, fields: filtered });
   };
 
-  const createNewSecret = async () => {
+  const updateSecret = async () => {
     await httpRequest(
       "data",
-      "create_secret",
-      "",
-      "POST",
-      secretData,
+      "update_secret",
+      targetSecret._id,
+      "PATCH",
+      updateSecretData,
       true,
       false,
     );
 
-    setSecretWindow(false);
-    setSecretData({ categoryName: "", name: "", fields: [] });
+    setSecretIDUpdateWindow(null);
+    setUpdateSecretData({ categoryName: "", name: "", fields: [] });
     setField({
       key: "",
       value: "",
     });
   };
 
+  if (!targetSecret) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-3xl text-(--primary)">
+        <RiLoader2Fill className="animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full max-w-100 fixed top-1/2 left-1/2 -translate-1/2 rounded-lg shadow-[0px_0px_3px_var(--shadow-light)] bg-(--card-light) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
-      <h2 className="w-full text-(--primary) text-lg pl-2">
-        Create New Secret
-      </h2>
+      <h2 className="w-full text-(--primary) text-lg pl-2">Update Secret</h2>
       <select
         onChange={handleChange}
-        value={secretData.categoryName}
+        value={updateSecretData?.categoryName}
         className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
         name="categoryName"
       >
@@ -95,7 +108,7 @@ const NewSecretWindow = () => {
       <input
         type="text"
         name="name"
-        value={secretData.name}
+        value={updateSecretData?.name}
         onChange={handleChange}
         className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
         placeholder="Secret name"
@@ -129,34 +142,36 @@ const NewSecretWindow = () => {
           </button>
         </div>
         <hr className="w-full text-(--border-light)" />
-        {secretData.fields.map((field, i) => (
-          <SecretFields
+        {updateSecretData?.fields.map((field, i) => (
+          <UpdateSecretFields
             key={`${i}-field`}
             field={field}
             removeField={removeField}
+            updateSecretData={updateSecretData}
+            setUpdateSecretData={setUpdateSecretData}
           />
         ))}
       </div>
       <div className="w-full flex flex-row items-center justify-end gap-3 ">
         <button
-          onClick={() => setSecretWindow((prev) => !prev)}
+          onClick={() => setSecretIDUpdateWindow(null)}
           className="py-1.75 px-4 bg-transparent border border-(--primary)/60 text-(--primary)/60 rounded-md cursor-pointer text-sm"
         >
           Cancel
         </button>
         <button
           disabled={
-            !secretData.categoryName ||
-            !secretData.name ||
-            secretData.fields.length === 0
+            !updateSecretData?.categoryName ||
+            !updateSecretData?.name ||
+            updateSecretData?.fields.length === 0
           }
-          onClick={createNewSecret}
-          className={`py-[7.5px] px-4 ${secretData ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
+          onClick={updateSecret}
+          className={`py-[7.5px] px-4 ${updateSecretData ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
         >
           {dataLoading ? (
             <RiLoader2Fill className="animate-spin text-xl" />
           ) : (
-            "Create"
+            "Save"
           )}
         </button>
       </div>
@@ -164,4 +179,4 @@ const NewSecretWindow = () => {
   );
 };
 
-export default NewSecretWindow;
+export default UpdateSecretWindow;

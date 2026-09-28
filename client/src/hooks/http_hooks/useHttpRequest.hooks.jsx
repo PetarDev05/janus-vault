@@ -10,9 +10,8 @@ import { useGlobalContext } from "../context_hooks/useGlobalContext.hooks.jsx";
 export const useHttpRequest = () => {
   const { user, dispatchUser, setAuthLoading, setAuthStatus } =
     useAuthContext();
-  const { dispatchData } = useDataContext();
+  const { dispatchData, setDataLoading } = useDataContext();
   const { handleError, handleSuccess } = useGlobalContext();
-  // ovde moras da uvezes i dataLoading, zato sto moze biti jedan ili drugi, pa ti shodno tome trebaju dva uvezena loading state-a.
 
   const httpRequest = async (
     type,
@@ -23,7 +22,11 @@ export const useHttpRequest = () => {
     needAuth,
     needCredentials,
   ) => {
-    setAuthLoading(service); // ovde moras da dodas loading za data
+    if (type === "user") {
+      setAuthLoading(service);
+    } else {
+      setDataLoading(service);
+    }
     const response = await fetchWrapper(
       user === null,
       type,
@@ -36,16 +39,17 @@ export const useHttpRequest = () => {
     );
 
     setAuthLoading("");
+    setDataLoading("");
 
     if (!response.success) {
       handleError(response);
-      
+
       if (response.action === "SIGN_OUT") {
         dispatchUser({ type: "REMOVE_USER" });
         removeAccessToken();
         setAuthStatus("unauthenticated");
       }
-      
+
       if (type === "user" && service !== "refresh") {
         dispatchUser({ type: "REMOVE_USER" });
         setAuthStatus("unauthenticated");
@@ -53,7 +57,7 @@ export const useHttpRequest = () => {
 
       return;
     }
-    
+
     handleSuccess(response.message);
 
     if (type === "user") {

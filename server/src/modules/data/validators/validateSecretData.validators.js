@@ -27,11 +27,11 @@ export const validateSecretData = (categoryName, name, fields) => {
     );
   }
 
-  if (fields.length > 10) {
+  if (fields.length > 5) {
     throw new APIError(
       400,
       "INVALID_FORMAT",
-      "There can be maximum of 10 fields in one secret.",
+      "There can be maximum of 5 fields in one secret.",
       null,
     );
   }

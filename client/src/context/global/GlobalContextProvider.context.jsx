@@ -13,6 +13,7 @@ const GlobalContextProvider = ({ children }) => {
   const [profileWindow, setProfileWindow] = useState(false);
   const [categoryWindow, setCategoryWindow] = useState(false);
   const [secretWindow, setSecretWindow] = useState(false);
+  const [secretIDUpdateWindow, setSecretIDUpdateWindow] = useState(null);
 
   const html = document.documentElement;
 
@@ -75,6 +76,8 @@ const GlobalContextProvider = ({ children }) => {
     setCategoryWindow,
     secretWindow,
     setSecretWindow,
+    secretIDUpdateWindow,
+    setSecretIDUpdateWindow,
   };
 
   return (

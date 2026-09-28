@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useGlobalContext } from "../../hooks/context_hooks/useGlobalContext.hooks.jsx";
 import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
+import { useDataContext } from "../../hooks/context_hooks/useDataContext.hooks.jsx";
+import { RiLoader2Fill } from "react-icons/ri";
 
 const NewCategoryWindow = () => {
   const { setCategoryWindow } = useGlobalContext();
+  const { dataLoading } = useDataContext();
   const httpRequest = useHttpRequest();
-
+  // napravi loader
   const [categoryName, setCategoryName] = useState("");
 
   const handleChange = (e) => {
@@ -23,12 +26,14 @@ const NewCategoryWindow = () => {
       false,
     );
 
-    setCategoryName("");
-    setCategoryWindow(false);
+    setTimeout(() => {
+      setCategoryName("");
+      setCategoryWindow(false);
+    }, 10000);
   };
 
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-1/2 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
+    <div className="fixed top-1/2 left-1/2 -translate-1/2 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--card-light) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
       <h2 className="w-full text-(--primary) text-lg">Create New Category</h2>
       <input
         type="text"
@@ -47,9 +52,9 @@ const NewCategoryWindow = () => {
         <button
           disabled={!categoryName}
           onClick={createNewCategory}
-          className={`py-1.75 px-4 ${categoryName ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
+          className={`py-[7.5px] px-4 ${categoryName ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
         >
-          Create
+          {dataLoading ? <RiLoader2Fill className="animate-spin text-xl" /> : "Create"}
         </button>
       </div>
     </div>

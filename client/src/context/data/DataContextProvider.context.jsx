@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { DataContext } from "./DataContext.context.jsx";
 import { useAuthContext } from "../../hooks/context_hooks/useAuthContext.hooks.jsx";
 import { fetchWrapper } from "../../services/fetchWrapper.services.js";
@@ -48,6 +48,8 @@ const DataContextProvider = ({ children }) => {
     categories: [],
   });
 
+  const [dataLoading, setDataLoading] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       if (
@@ -58,6 +60,7 @@ const DataContextProvider = ({ children }) => {
         return;
       }
 
+      setDataLoading("all");
       const response = await fetchWrapper(
         authStatus === "authenticated",
         "data",
@@ -74,6 +77,8 @@ const DataContextProvider = ({ children }) => {
       } else {
         handleError(response);
       }
+
+      setDataLoading("");
     };
 
     fetchData();
@@ -82,6 +87,8 @@ const DataContextProvider = ({ children }) => {
   const value = {
     ...state,
     dispatchData: dispatch,
+    dataLoading,
+    setDataLoading,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

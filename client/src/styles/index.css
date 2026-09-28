@@ -14,9 +14,10 @@
   /* global colors */
   --primary: #3a58ff;
   --sign-out-orange: #eb9c42;
-  --delete-red: #c41919;
+  --delete-red: #ed3838;
   --white: #ffffff;
   --black: #000000;
+  
 
   /* light theme */
   --bg-light-primary: #f7f7f7;
@@ -25,6 +26,7 @@
   --text-light: #949494;
   --heading-light: #00023a;
   --card-light: #fafafa;
+  --shadow-light: #c5c5c5;
   
   /* dark theme */
   --bg-dark-primary: #060606;
@@ -33,6 +35,7 @@
   --text-dark: #8d8d8d;
   --heading-dark: #eeeeee;
   --card-dark: #131313;
+  --shadow-dark: #1b1a1a;
 
   /* toast colors */
   --toast-success: #2fd078;
