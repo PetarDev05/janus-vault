@@ -22,8 +22,6 @@ const UpdateSecretFields = ({
   useEffect(() => {
     const addUpdatedField = () => {
       let oldFields = [...updateSecretData.fields];
-      console.log(oldFields);
-
       let newFields = oldFields.map((fld) =>
         fld._id === fieldForUpdate._id ? fieldForUpdate : fld,
       );

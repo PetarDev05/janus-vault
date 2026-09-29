@@ -49,6 +49,30 @@ const DataContextProvider = ({ children }) => {
   });
 
   const [dataLoading, setDataLoading] = useState("");
+  const [filteredSecrets, setFilteredSecrets] = useState(state.secrets);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState({
+    name: "All",
+    categoryID: "",
+  });
+
+  const filterSecrets = (categoryID) => {
+    if (categoryID === "All") {
+      setFilteredSecrets(state.secrets);
+      return;
+    }
+
+    let startingSecrets = [...state.secrets];
+    let filtered = startingSecrets.filter((s) => s.categoryID === categoryID);
+    setFilteredSecrets(filtered);
+  };
+
+  useEffect(() => {
+    const updateFilteredSecrets = () => {
+      setFilteredSecrets(state.secrets);
+    };
+
+    updateFilteredSecrets();
+  }, [state, dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +98,7 @@ const DataContextProvider = ({ children }) => {
 
       if (response.success) {
         dispatch({ type: "FETCH_DATA", payload: response.data });
+        setFilteredSecrets(response.data.secrets);
       } else {
         handleError(response);
       }
@@ -89,6 +114,10 @@ const DataContextProvider = ({ children }) => {
     dispatchData: dispatch,
     dataLoading,
     setDataLoading,
+    filteredSecrets,
+    filterSecrets,
+    selectedCategoryFilter,
+    setSelectedCategoryFilter,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

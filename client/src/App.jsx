@@ -10,20 +10,20 @@ import FaintLayer from "./components/global/units/FaintLayer.components.jsx";
 import { useGlobalContext } from "./hooks/context_hooks/useGlobalContext.hooks.jsx";
 
 const App = () => {
-  const { user, authStatus } = useAuthContext();
-  const { categoryWindow, secretWindow, secretIDUpdateWindow } = useGlobalContext();
-
-  if (authStatus === "initializing") {
-    return <GlobalLoadingScreen />;
-  }
+  const { user } = useAuthContext();
+  const { categoryWindow, secretWindow, secretIDUpdateWindow } =
+    useGlobalContext();
 
   return (
     <main className="w-full min-h-screen bg-(--bg-light-primary) dark:bg-(--bg-dark-primary)">
+      <GlobalLoadingScreen />
       {user && <Header />}
       {user && <Sidebar />}
       {user && <SidebarMobile />}
       {user && <SearchMenu />}
-      {(categoryWindow || secretWindow || secretIDUpdateWindow) && <FaintLayer />}
+      {(categoryWindow || secretWindow || secretIDUpdateWindow) && (
+        <FaintLayer />
+      )}
       <Outlet />
       <Toaster
         toastOptions={{

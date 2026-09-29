@@ -26,10 +26,8 @@ const NewCategoryWindow = () => {
       false,
     );
 
-    setTimeout(() => {
-      setCategoryName("");
-      setCategoryWindow(false);
-    }, 10000);
+    setCategoryName("");
+    setCategoryWindow(false);
   };
 
   return (
@@ -54,7 +52,11 @@ const NewCategoryWindow = () => {
           onClick={createNewCategory}
           className={`py-[7.5px] px-4 ${categoryName ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
         >
-          {dataLoading ? <RiLoader2Fill className="animate-spin text-xl" /> : "Create"}
+          {dataLoading ? (
+            <RiLoader2Fill className="animate-spin text-xl" />
+          ) : (
+            "Create"
+          )}
         </button>
       </div>
     </div>

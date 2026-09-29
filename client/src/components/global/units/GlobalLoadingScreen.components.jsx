@@ -7,7 +7,7 @@ const GlobalLoadingScreen = () => {
 
   return (
     <div
-      className={`fixed inset-0 w-full h-screen bg-linear-to-br from-(--primary)/80 to-(--primary)/60 flex flex-col items-center justify-center gap-6 text-(--white) ${authStatus === "initializing" ? "" : "opacity-0"} transition-all duration-300 pointer-events-none`}
+      className={`fixed inset-0 w-full min-h-screen bg-linear-to-br from-(--primary)/80 to-(--primary)/60 flex flex-col items-center justify-center gap-6 text-(--white) ${authStatus === "initializing" ? "" : "opacity-0"} transition-all duration-300 pointer-events-none z-400`}
     >
       <div className="flex flex-row items-center gap-6 text-6xl">
         <GiCrystalCluster className="text-7xl" />

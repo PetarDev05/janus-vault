@@ -1,14 +1,11 @@
-import { LuCopy } from "react-icons/lu";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa";
+
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useState } from "react";
 import { useHttpRequest } from "../../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 import { useGlobalContext } from "../../../hooks/context_hooks/useGlobalContext.hooks.jsx";
+import CardField from "./CardField.components.jsx";
 
 const SecretCard = ({ secret }) => {
-  const [visible, setVisible] = useState(false);
   const httpRequest = useHttpRequest();
   const { setSecretIDUpdateWindow } = useGlobalContext();
 
@@ -33,31 +30,9 @@ const SecretCard = ({ secret }) => {
         </div>
         <hr className="w-full text-(--border-light)" />
         <div className="w-full flex flex-col items-center gap-3">
-          {secret.fields.map((field, i) => (
+          {secret.fields.map((field) => (
             // ovo ispod mora da bude posebna komponenta
-            <div
-              key={`${i}-${field.key}`}
-              className="w-full flex flex-row items-center justify-between"
-            >
-              <p className="">{field.key}: </p>
-              <div className="flex flex-row items-center gap-3">
-                <input
-                  value={field.value}
-                  type={`${visible ? "text" : "password"}`}
-                  readOnly
-                  className="rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll w-35"
-                />
-                <span className="p-1.75 text-(--primary)/60 border border-(--primary)/60 rounded-md cursor-pointer text-md">
-                  <LuCopy />
-                </span>
-                <span
-                  onClick={() => setVisible((prev) => !prev)}
-                  className={`p-1.75 ${visible ? "text-(--white) bg-(--primary)/60" : "text-(--primary)/60 bg-(--white)"} rounded-md cursor-pointer text-md border border-(--primary)/60`}
-                >
-                  {visible ? <FaRegEye /> : <FaRegEyeSlash />}
-                </span>
-              </div>
-            </div>
+            <CardField key={field._id} field={field} />
             // --------------------------------------
           ))}
         </div>
