@@ -1,6 +1,9 @@
 import Category from "../models/category.models.js";
 import Secret from "../models/secret.models.js";
+import { removeIndex } from "../utils/removeIndex.utils.js";
 import { validateSecretData } from "../validators/validateSecretData.validators.js";
+import { decryptSecretFields } from "./decryptSecretFields.services.js";
+import { encryptSecretFields } from "./encryptSecretFields.services.js";
 
 export const updateSecretService = async (
   userID,
@@ -9,6 +12,8 @@ export const updateSecretService = async (
   fields,
   secretID,
 ) => {
+  fields = removeIndex(fields);
+
   // validate provided data
   validateSecretData(categoryName, name, fields);
 
@@ -28,9 +33,13 @@ export const updateSecretService = async (
     oldSecret.name = name;
   }
 
+  fields = encryptSecretFields(fields);
+
   oldSecret.fields = fields;
 
   await oldSecret.save();
 
-  return oldSecret
+  oldSecret.fields = decryptSecretFields(fields);
+
+  return oldSecret;
 };

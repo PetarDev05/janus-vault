@@ -69,6 +69,7 @@ const NewSecretWindow = () => {
     setSecretWindow(false);
     setSecretData({ categoryName: "", name: "", fields: [] });
     setField({
+      index: 0,
       key: "",
       value: "",
     });
