@@ -6,10 +6,11 @@ import NewSecretWindow from "../components/global/NewSecretWindow.components.jsx
 import CategoryContainer from "../components/dashboard/CategoryContainer.components.jsx";
 import SecretContainer from "../components/dashboard/SecretContainer.components.jsx";
 import UpdateSecretWindow from "../components/global/UpdateSecretWindow.components.jsx";
+import ConfirmationWindow from "../components/global/ConfirmationWindow.components.jsx";
 
 const Dashboard = () => {
   const { authStatus } = useAuthContext();
-  const { categoryWindow, secretWindow, secretIDUpdateWindow } =
+  const { categoryWindow, secretWindow, secretIDUpdateWindow, confirmationWindow } =
     useGlobalContext();
 
   if (authStatus === "unauthenticated") {
@@ -21,6 +22,7 @@ const Dashboard = () => {
       {categoryWindow && <NewCategoryWindow />}
       {secretWindow && <NewSecretWindow />}
       {secretIDUpdateWindow && <UpdateSecretWindow />}
+      {confirmationWindow.show && <ConfirmationWindow />}
       <CategoryContainer />
       <SecretContainer />
     </div>

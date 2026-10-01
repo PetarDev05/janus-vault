@@ -6,7 +6,7 @@ const SearchMenu = () => {
 
   return (
     <div
-      className={`min-[500px]:hidden w-full p-5 fixed ${menu ? "translate-y-16" : "-translate-y-full"} bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) border-b border-(--border-light) dark:border-(--border-dark) transition-all duration-300 flex items-center justify-center`}
+      className={`w-full min-[500px]:hidden p-5 fixed ${menu ? "translate-y-16" : "-translate-y-full"} bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) border-b border-(--border-light) dark:border-(--border-dark) transition-all duration-300 flex items-center justify-center z-19`}
     >
       <SearchBar />
     </div>

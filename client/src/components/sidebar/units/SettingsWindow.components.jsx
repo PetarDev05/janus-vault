@@ -6,20 +6,28 @@ import { useAuthContext } from "../../../hooks/context_hooks/useAuthContext.hook
 import { RiLoader2Fill } from "react-icons/ri";
 
 const SettingsWindow = () => {
-  const { setSettings } = useGlobalContext();
+  const { setSettings, setConfirmationWindow } = useGlobalContext();
   const { authLoading } = useAuthContext();
   const httpRequest = useHttpRequest();
 
   const signOut = async () => {
     await httpRequest("user", "sign_out", "", "PATCH", null, false, true);
+    setSettings(false);
   };
 
   const deleteAccount = async () => {
-    await httpRequest("user", "delete", "", "DELETE", null, false, true);
+    setConfirmationWindow({
+      show: true,
+      color: "red",
+      message: "remove your account",
+      actionText: "Remove account",
+      secretID: "",
+    });
+    setSettings(false);
   };
 
   return (
-    <div className="absolute -left-1 -bottom-1 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
+    <div className="absolute -left-1 -bottom-1 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
       <div className="w-full flex flex-row items-center justify-between">
         <h2 className="text-(--primary) text-lg">Settings</h2>
         <span

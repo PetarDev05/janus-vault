@@ -33,13 +33,10 @@ const SignUpForm = () => {
 
   return (
     <form
-      className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) bg-transparent rounded-xl backdrop-blur-xl shadow"
+      className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) bg-(--card-light)/40 dark:bg-(--card-dark)/40 rounded-xl backdrop-blur-xl shadow"
       onSubmit={handleSubmit}
     >
       <Logo />
-      {/* <h2 className="text-(--heading-light) dark:text-(--heading-dark) font-semibold text-2xl">
-        Sign up
-      </h2> */}
       <p className="text-(--text-light) text-center text-lg dark:text-(--text-dark) mb-3">
         Create your personal account
       </p>
@@ -56,7 +53,7 @@ const SignUpForm = () => {
         value={input.username}
         onChange={handleInputChange}
         placeholder="John Doe"
-        className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
+        className="w-full py-2 px-4 border border-(--border-light) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
       <label
         htmlFor="email-sign-in"
@@ -71,7 +68,7 @@ const SignUpForm = () => {
         value={input.email}
         onChange={handleInputChange}
         placeholder="john@gmail.com"
-        className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
+        className="w-full py-2 px-4 border border-(--border-light) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
       <label
         htmlFor="password-sign-in"
@@ -86,7 +83,7 @@ const SignUpForm = () => {
           value={input.password}
           onChange={handleInputChange}
           placeholder="\/**+**\/"
-          className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
+          className="w-full py-2 px-4 border border-(--border-light) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
         />
         <span
           onClick={() => setVisibility((prev) => !prev)}

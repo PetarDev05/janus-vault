@@ -38,7 +38,7 @@ const UpdateSecretFields = ({
         type="text"
         value={fieldForUpdate.key}
         onChange={handleFieldChange}
-        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
+        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll dark:bg-(--bg-dark-primary) dark:border-(--border-dark)"
       />
 
       <input
@@ -46,7 +46,7 @@ const UpdateSecretFields = ({
         name="value"
         value={fieldForUpdate.value}
         onChange={handleFieldChange}
-        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
+        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll dark:bg-(--bg-dark-primary) dark:border-(--border-dark)"
       />
       <button
         onClick={() => removeField(fieldForUpdate._id)}

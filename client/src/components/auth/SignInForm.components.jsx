@@ -36,7 +36,7 @@ const SignInForm = () => {
 
   return (
     <form
-      className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) rounded-xl bg-transparent backdrop-blur-xl shadow"
+      className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) bg-(--card-light)/40 dark:bg-(--card-dark)/40 rounded-xl backdrop-blur-xl"
       onSubmit={handleSubmit}
     >
       <Logo />
@@ -57,7 +57,7 @@ const SignInForm = () => {
         value={input.username}
         onChange={handleChange}
         placeholder="John Doe"
-        className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
+        className="w-full py-2 px-4 border border-(--border-light) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
       />
       <label
         htmlFor="password-sign-in"
@@ -72,7 +72,7 @@ const SignInForm = () => {
           value={input.password}
           onChange={handleChange}
           placeholder="\/**+**\/"
-          className="w-full py-2 px-4 border border-(--border-light) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
+          className="w-full py-2 px-4 border border-(--border-light) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) dark:border-(--border-dark) text-(--text-light) dark:text-(--text-dark) rounded-full outline-1 outline-transparent focus:outline-(--primary)"
         />
         <span
           onClick={() => setVisibility((prev) => !prev)}

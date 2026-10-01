@@ -7,7 +7,7 @@ const Header = () => {
   const { menu, setMenu } = useGlobalContext();
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-20 p-4 flex flex-row items-center justify-between border-b border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl">
+    <header className="w-full fixed top-0 left-0 right-0 z-20 p-2.5 flex flex-row items-center justify-between border-b border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) backdrop-blur-xl">
       <Logo />
       <div className="max-[500px]:hidden ">
         <SearchBar />

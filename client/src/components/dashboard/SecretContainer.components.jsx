@@ -49,7 +49,7 @@ const SecretContainer = () => {
       </h2>
 
       {(!secrets.length || (secrets.length && !filteredSecrets.length)) && (
-        <div className="w-full py-50 px-10 flex flex-col items-center justify-center gap-3 text-(--text-light) text-center">
+        <div className="w-full max-[500px]:py-20 py-50 px-10 flex flex-col items-center justify-center gap-3 text-(--text-light) text-center">
           {!secrets.length && (
             <>
               <p>
@@ -57,7 +57,7 @@ const SecretContainer = () => {
                 {categories.length !== 0 && (
                   <span
                     onClick={() => setSecretWindow(true)}
-                    className="text-(--primary)/60 underline cursor-pointer"
+                    className="text-(--primary)/70 underline cursor-pointer"
                   >
                     Create your first secret.
                   </span>
@@ -66,7 +66,7 @@ const SecretContainer = () => {
               {selectedCategoryFilter.name !== "All" && (
                 <p
                   onClick={deleteCategory}
-                  className="text-(--primary)/60 underline cursor-pointer"
+                  className="text-(--delete-red)/60 underline cursor-pointer"
                 >
                   Delete this category
                 </p>
@@ -83,14 +83,14 @@ const SecretContainer = () => {
                 Either{" "}
                 <span
                   onClick={deleteCategory}
-                  className="text-(--primary)/60 underline cursor-pointer"
+                  className="text-(--delete-red)/60 underline cursor-pointer"
                 >
                   delete this category
                 </span>{" "}
                 or{" "}
                 <span
                   onClick={() => setSecretWindow(true)}
-                  className="text-(--primary)/60 underline cursor-pointer"
+                  className="text-(--primary)/70 underline cursor-pointer"
                 >
                   create new secret.
                 </span>
@@ -100,7 +100,7 @@ const SecretContainer = () => {
       )}
 
       {secrets.length !== 0 && filteredSecrets.length !== 0 && (
-        <div className="w-full max-w-310 grid grid-cols-3 gap-5">
+        <div className="max-[900px]:w-full max-w-310 grid grid-cols-1 min-[900px]:grid-cols-2 min-[1300px]:grid-cols-3 gap-5">
           {filteredSecrets.map((secret, i) => (
             <SecretCard key={`${i}-${secret._id}`} secret={secret} />
           ))}

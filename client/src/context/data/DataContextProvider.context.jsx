@@ -118,6 +118,7 @@ const DataContextProvider = ({ children }) => {
     filterSecrets,
     selectedCategoryFilter,
     setSelectedCategoryFilter,
+    setFilteredSecrets,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

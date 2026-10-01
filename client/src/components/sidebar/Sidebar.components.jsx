@@ -10,7 +10,7 @@ const Sidebar = () => {
     useGlobalContext();
 
   return (
-    <div className="max-[500px]:hidden w-20 min-h-screen fixed border-r border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) backdrop-blur-xl flex flex-col items-center justify-between pt-25 pb-8 px-1 z-18 transition-all duration-200">
+    <div className="max-[500px]:hidden w-20 min-h-screen fixed border-r border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) backdrop-blur-xl flex flex-col items-center justify-between pt-25 pb-8 px-1 z-18">
       <div className="relative flex flex-col items-center gap-5">
         <span
           onClick={() => setCreationWindow((prev) => !prev)}

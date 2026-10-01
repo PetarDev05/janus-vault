@@ -15,10 +15,10 @@
   --primary: #3a58ff;
   --sign-out-orange: #eb9c42;
   --delete-red: #ed3838;
+  --success-green: #1ec463;
   --white: #ffffff;
   --black: #000000;
   
-
   /* light theme */
   --bg-light-primary: #f7f7f7;
   --button-bg-layer-light: #f0f0f0;
@@ -29,13 +29,13 @@
   --shadow-light: #c5c5c5;
   
   /* dark theme */
-  --bg-dark-primary: #060606;
+  --bg-dark-primary: #1a1a1a;
   --button-bg-layer-dark: #252525;
   --border-dark: #303030;
   --text-dark: #8d8d8d;
   --heading-dark: #eeeeee;
   --card-dark: #131313;
-  --shadow-dark: #1b1a1a;
+  --shadow-dark: #0b0b0b;
 
   /* toast colors */
   --toast-success: #2fd078;

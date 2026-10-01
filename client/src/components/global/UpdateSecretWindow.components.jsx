@@ -90,12 +90,12 @@ const UpdateSecretWindow = () => {
   }
 
   return (
-    <div className="w-full max-w-100 fixed top-1/2 left-1/2 -translate-1/2 rounded-lg shadow-[0px_0px_3px_var(--shadow-light)] bg-(--card-light) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
+    <div className="w-full max-w-100 fixed top-1/2 left-1/2 -translate-1/2 rounded-lg backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100 shadow-[0px_0px_3px_var(--shadow-light)] dark:shadow-[0px_0px_3px_var(--shadow-dark)] bg-(--card-light) dark:bg-(--card-dark)">
       <h2 className="w-full text-(--primary) text-lg pl-2">Update Secret</h2>
       <select
         onChange={handleChange}
         value={updateSecretData?.categoryName}
-        className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
+        className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/70 py-1.5 px-4 min-w-0 text-sm dark:bg-(--bg-dark-primary) appearance-none dark:border-(--border-dark)"
         name="categoryName"
       >
         <option value="">Chose category</option>
@@ -110,7 +110,7 @@ const UpdateSecretWindow = () => {
         name="name"
         value={updateSecretData?.name}
         onChange={handleChange}
-        className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
+        className="w-full rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/70 py-1.5 px-4 min-w-0 text-sm dark:bg-(--bg-dark-primary) dark:border-(--border-dark)"
         placeholder="Secret name"
       />
       <div className="w-full flex flex-col items-start gap-4">
@@ -123,7 +123,7 @@ const UpdateSecretWindow = () => {
             name="key"
             value={field.key}
             onChange={handleFieldChange}
-            className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
+            className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/70 py-1.5 px-4 min-w-0 text-sm dark:bg-(--bg-dark-primary) dark:border-(--border-dark)"
             placeholder="key"
           />
           <input
@@ -131,17 +131,17 @@ const UpdateSecretWindow = () => {
             name="value"
             value={field.value}
             onChange={handleFieldChange}
-            className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/60 py-1.5 px-4 min-w-0 text-sm"
+            className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none focus:border-(--primary)/70 py-1.5 px-4 min-w-0 text-sm dark:bg-(--bg-dark-primary) dark:border-(--border-dark)"
             placeholder="value"
           />
           <button
             onClick={addField}
-            className="py-1.75 px-4 rounded-md bg-(--primary)/60 text-(--white) cursor-pointer text-sm"
+            className="py-1.75 px-4 rounded-md bg-(--primary)/70 text-(--white) cursor-pointer text-sm"
           >
             Add
           </button>
         </div>
-        <hr className="w-full text-(--border-light)" />
+        <hr className="w-full text-(--border-light) dark:text-(--border-dark)" />
         {updateSecretData?.fields.map((field, i) => (
           <UpdateSecretFields
             key={`${i}-field`}
@@ -155,7 +155,7 @@ const UpdateSecretWindow = () => {
       <div className="w-full flex flex-row items-center justify-end gap-3 ">
         <button
           onClick={() => setSecretIDUpdateWindow(null)}
-          className="py-1.75 px-4 bg-transparent border border-(--primary)/60 text-(--primary)/60 rounded-md cursor-pointer text-sm"
+          className="py-1.75 px-4 bg-transparent border border-(--primary)/70 text-(--primary)/70 rounded-md cursor-pointer text-sm"
         >
           Cancel
         </button>
@@ -166,7 +166,7 @@ const UpdateSecretWindow = () => {
             updateSecretData?.fields.length === 0
           }
           onClick={updateSecret}
-          className={`py-[7.5px] px-4 ${updateSecretData ? "bg-(--primary)/60" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
+          className={`py-[7.5px] px-4 ${updateSecretData ? "bg-(--primary)/70" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
         >
           {dataLoading ? (
             <RiLoader2Fill className="animate-spin text-xl" />

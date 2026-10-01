@@ -11,8 +11,12 @@ import { useGlobalContext } from "./hooks/context_hooks/useGlobalContext.hooks.j
 
 const App = () => {
   const { user } = useAuthContext();
-  const { categoryWindow, secretWindow, secretIDUpdateWindow } =
-    useGlobalContext();
+  const {
+    categoryWindow,
+    secretWindow,
+    secretIDUpdateWindow,
+    confirmationWindow,
+  } = useGlobalContext();
 
   return (
     <main className="w-full min-h-screen bg-(--bg-light-primary) dark:bg-(--bg-dark-primary)">
@@ -21,9 +25,10 @@ const App = () => {
       {user && <Sidebar />}
       {user && <SidebarMobile />}
       {user && <SearchMenu />}
-      {(categoryWindow || secretWindow || secretIDUpdateWindow) && (
-        <FaintLayer />
-      )}
+      {(categoryWindow ||
+        secretWindow ||
+        secretIDUpdateWindow ||
+        confirmationWindow.show) && <FaintLayer />}
       <Outlet />
       <Toaster
         toastOptions={{

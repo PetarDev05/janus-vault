@@ -14,6 +14,13 @@ const GlobalContextProvider = ({ children }) => {
   const [categoryWindow, setCategoryWindow] = useState(false);
   const [secretWindow, setSecretWindow] = useState(false);
   const [secretIDUpdateWindow, setSecretIDUpdateWindow] = useState(null);
+  const [confirmationWindow, setConfirmationWindow] = useState({
+    show: false,
+    color: "",
+    message: "",
+    actionText: "",
+    secretID: "",
+  });
 
   const html = document.documentElement;
 
@@ -78,6 +85,8 @@ const GlobalContextProvider = ({ children }) => {
     setSecretWindow,
     secretIDUpdateWindow,
     setSecretIDUpdateWindow,
+    confirmationWindow,
+    setConfirmationWindow,
   };
 
   return (

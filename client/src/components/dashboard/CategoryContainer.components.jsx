@@ -20,7 +20,7 @@ const CategoryContainer = () => {
           No categories found.{" "}
           <span
             onClick={() => setCategoryWindow(true)}
-            className="text-(--primary)/60 underline cursor-pointer"
+            className="text-(--primary)/70 underline cursor-pointer"
           >
             Create new category
           </span>
@@ -32,7 +32,7 @@ const CategoryContainer = () => {
               filterSecrets("All");
               setSelectedCategoryFilter({ name: "All", categoryID: "" });
             }}
-            className={`px-4 py-1 text-[12px]  ${selectedCategoryFilter.name === "All" ? "bg-(--primary)/60 text-(--white)" : "text-(--primary)/60"} border border-(--primary)/60 rounded-md cursor-pointer ${!categories || !categories.length ? "hidden" : ""}`}
+            className={`px-4 py-1 text-[12px]  ${selectedCategoryFilter.name === "All" ? "bg-(--primary)/70 text-(--white)" : "text-(--primary)/70"} border border-(--primary)/70 rounded-md cursor-pointer ${!categories || !categories.length ? "hidden" : ""}`}
           >
             All
           </button>
@@ -46,7 +46,7 @@ const CategoryContainer = () => {
                   categoryID: category._id,
                 });
               }}
-              className={`px-4 py-1 text-[12px] ${selectedCategoryFilter.name === category.name ? "bg-(--primary)/60 text-(--white)" : "text-(--primary)/60 "} border border-(--primary)/60 rounded-md cursor-pointer`}
+              className={`px-4 py-1 text-[12px] ${selectedCategoryFilter.name === category.name ? "bg-(--primary)/70 text-(--white)" : "text-(--primary)/70 "} border border-(--primary)/70 rounded-md cursor-pointer`}
             >
               {category.name}
             </button>
@@ -54,7 +54,7 @@ const CategoryContainer = () => {
         </div>
       )}
 
-      <hr className="w-full text-(--border-light)" />
+      <hr className="w-full text-(--border-light) dark:text-(--border-dark)" />
     </div>
   );
 };
