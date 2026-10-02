@@ -21,7 +21,10 @@ const CardField = ({ field }) => {
 
   return (
     <div className="w-full flex max-[500px]:flex-col max-[500px]:items-start flex-row items-center justify-between max-[500px]:gap-2 gap-5">
-      <p className="text-(--text-light)">{field.key}: </p>
+      <p className="text-(--text-light)">
+        {field.key.length <= 10 ? field.key : field.key.slice(0, 10) + "..."}
+        :{" "}
+      </p>
       <div className="flex flex-row items-center gap-3">
         <input
           value={field.value}

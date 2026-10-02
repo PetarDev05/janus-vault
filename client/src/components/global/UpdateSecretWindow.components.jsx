@@ -63,7 +63,7 @@ const UpdateSecretWindow = () => {
   };
 
   const updateSecret = async () => {
-    await httpRequest(
+    const response = await httpRequest(
       "data",
       "update_secret",
       targetSecret._id,
@@ -73,12 +73,14 @@ const UpdateSecretWindow = () => {
       false,
     );
 
-    setSecretIDUpdateWindow(null);
-    setUpdateSecretData({ categoryName: "", name: "", fields: [] });
-    setField({
-      key: "",
-      value: "",
-    });
+    if (response.success) {
+      setSecretIDUpdateWindow(null);
+      setUpdateSecretData({ categoryName: "", name: "", fields: [] });
+      setField({
+        key: "",
+        value: "",
+      });
+    }
   };
 
   if (!targetSecret) {
@@ -166,7 +168,13 @@ const UpdateSecretWindow = () => {
             updateSecretData?.fields.length === 0
           }
           onClick={updateSecret}
-          className={`py-[7.5px] px-4 ${updateSecretData ? "bg-(--primary)/70" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
+          className={`py-[7.5px] px-4 ${
+            !updateSecretData?.categoryName ||
+            !updateSecretData?.name ||
+            updateSecretData?.fields.length === 0
+              ? "bg-(--primary)/30"
+              : "bg-(--primary)/70"
+          } rounded-md text-(--white) cursor-pointer text-sm`}
         >
           {dataLoading ? (
             <RiLoader2Fill className="animate-spin text-xl" />

@@ -27,7 +27,7 @@ const SettingsWindow = () => {
   };
 
   return (
-    <div className="absolute -left-1 -bottom-1 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
+    <div className="absolute -left-1 -bottom-1 p-5 pb-20 w-70 min-[500px]:w-120 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--card-light) dark:bg-(--card-dark) backdrop-blur-xl z-15 flex flex-col items-start gap-4">
       <div className="w-full flex flex-row items-center justify-between">
         <h2 className="text-(--primary) text-lg">Settings</h2>
         <span

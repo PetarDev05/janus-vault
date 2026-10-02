@@ -55,7 +55,7 @@ export const useHttpRequest = () => {
         setAuthStatus("unauthenticated");
       }
 
-      return;
+      return response;
     }
 
     handleSuccess(response.message);
@@ -110,6 +110,8 @@ export const useHttpRequest = () => {
         default:
           break;
       }
+
+      return response;
     }
   };
 

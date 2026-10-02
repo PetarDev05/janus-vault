@@ -20,8 +20,16 @@ const SecretCard = ({ secret }) => {
     <div className="w-full max-w-100 p-5 rounded-xl border border-(--border-light) dark:border-(--border-dark) flex flex-col items-center justify-between gap-8 shadow bg-(--card-light) dark:bg-(--card-dark)/40">
       <div className="w-full flex flex-col items-center gap-3">
         <div className="w-full flex flex-row items-center justify-between">
-          <p className="text-(--primary)">{secret.name}</p>
-          <p className="text-(--text-light)">{secret.categoryName}</p>
+          <p className="text-(--primary)">
+            {secret.name.length <= 15
+              ? secret.name
+              : secret.name.slice(0, 15) + "..."}
+          </p>
+          <p className="text-(--text-light)">
+            {secret.categoryName.length <= 12
+              ? secret.categoryName
+              : secret.categoryName.slice(0, 12) + "..."}
+          </p>
         </div>
         <hr className="w-full text-(--border-light) dark:text-(--border-dark)" />
         <div className="w-full flex flex-col items-center max-[500px]:gap-5 gap-3">

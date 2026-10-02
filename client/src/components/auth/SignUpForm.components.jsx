@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import Logo from "../global/units/Logo.components";
 import { useHttpRequest } from "../../hooks/http_hooks/useHttpRequest.hooks.jsx";
 import { RiLoader2Fill } from "react-icons/ri";
 import { useAuthContext } from "../../hooks/context_hooks/useAuthContext.hooks.jsx";
+import LogoOut from "../global/units/LogoOut.components.jsx";
 
 const SignUpForm = () => {
   const httpRequest = useHttpRequest();
@@ -36,7 +36,7 @@ const SignUpForm = () => {
       className="w-full max-w-90 flex flex-col items-center gap-4 px-6 py-8 border border-(--border-light) dark:border-(--border-dark) bg-(--card-light)/40 dark:bg-(--card-dark)/40 rounded-xl backdrop-blur-xl shadow"
       onSubmit={handleSubmit}
     >
-      <Logo />
+      <LogoOut />
       <p className="text-(--text-light) text-center text-lg dark:text-(--text-dark) mb-3">
         Create your personal account
       </p>

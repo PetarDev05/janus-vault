@@ -8,7 +8,6 @@ const NewCategoryWindow = () => {
   const { setCategoryWindow } = useGlobalContext();
   const { dataLoading } = useDataContext();
   const httpRequest = useHttpRequest();
-  // napravi loader
   const [categoryName, setCategoryName] = useState("");
 
   const handleChange = (e) => {
@@ -16,7 +15,7 @@ const NewCategoryWindow = () => {
   };
 
   const createNewCategory = async () => {
-    await httpRequest(
+    const response = await httpRequest(
       "data",
       "create_category",
       "",
@@ -26,12 +25,14 @@ const NewCategoryWindow = () => {
       false,
     );
 
-    setCategoryName("");
-    setCategoryWindow(false);
+    if (response.success) {
+      setCategoryName("");
+      setCategoryWindow(false);
+    }
   };
 
   return (
-    <div className="w-[90%] max-w-70 fixed top-1/2 left-1/2 -translate-1/2 rounded-lg border border-(--border-light) dark:border-(--border-dark) bg-(--card-light) dark:bg-(--card-dark) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
+    <div className="w-[90%] max-w-70 fixed top-1/2 left-1/2 -translate-1/2 rounded-lg shadow-[0px_0px_3px_var(--shadow-light)] dark:shadow-[0px_0px_3px_var(--shadow-dark)] bg-(--card-light) dark:bg-(--card-dark) backdrop-blur-xl p-5 flex flex-col items-center gap-5 z-100">
       <h2 className="w-full text-(--primary) text-lg">Create New Category</h2>
       <input
         type="text"

@@ -56,7 +56,7 @@ const NewSecretWindow = () => {
   };
 
   const createNewSecret = async () => {
-    await httpRequest(
+    const response = await httpRequest(
       "data",
       "create_secret",
       "",
@@ -66,13 +66,15 @@ const NewSecretWindow = () => {
       false,
     );
 
-    setSecretWindow(false);
-    setSecretData({ categoryName: "", name: "", fields: [] });
-    setField({
-      index: 0,
-      key: "",
-      value: "",
-    });
+    if (response.success) {
+      setSecretWindow(false);
+      setSecretData({ categoryName: "", name: "", fields: [] });
+      setField({
+        index: 0,
+        key: "",
+        value: "",
+      });
+    }
   };
 
   return (
@@ -152,7 +154,13 @@ const NewSecretWindow = () => {
             secretData.fields.length === 0
           }
           onClick={createNewSecret}
-          className={`py-[7.5px] px-4 ${secretData ? "bg-(--primary)/70" : "bg-(--primary)/30"} rounded-md text-(--white) cursor-pointer text-sm`}
+          className={`py-[7.5px] px-4 ${
+            !secretData.categoryName ||
+            !secretData.name ||
+            secretData.fields.length === 0
+              ? "bg-(--primary)/30"
+              : "bg-(--primary)/70"
+          } rounded-md text-(--white) cursor-pointer text-sm`}
         >
           {dataLoading ? (
             <RiLoader2Fill className="animate-spin text-xl" />

@@ -1,7 +1,7 @@
 import APIError from "../../../utils/APIError.utils.js";
 
 export const validateCategoryName = (categoryName) => {
-  if (!categoryName || categoryName.length < 2 || categoryName.length > 100) {
+  if (!categoryName || categoryName.length < 2 || categoryName.length > 50) {
     throw new APIError(
       400,
       "INVALID_FORMAT",
