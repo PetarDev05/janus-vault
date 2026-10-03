@@ -13,6 +13,8 @@
 :root {
   /* global colors */
   --primary: #3a58ff;
+  --loading-primary1: #637bff;
+  --loading-primary2: #9faeff;
   --sign-out-orange: #eb9c42;
   --delete-red: #ed3838;
   --success-green: #1ec463;
