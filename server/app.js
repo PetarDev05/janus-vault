@@ -13,7 +13,7 @@ app.use(helmet());
 app.use(
   cors({
     methods: ["GET", "POST", "PATCH", "DELETE"],
-    origin: true,
+    origin: "https://janus-vault.onrender.com",
     allowedHeaders: ["Content-type", "Authorization"],
     credentials: true,
   }),
