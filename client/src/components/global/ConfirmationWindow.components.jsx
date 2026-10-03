@@ -35,12 +35,12 @@ const ConfirmationWindow = () => {
   };
 
   return (
-    <div className="w-[90%] max-w-95 fixed top-1/2 left-1/2 -translate-1/2 z-100 p-7 bg-(--card-light) border border-(--delete-red) rounded-xl flex flex-col items-center gap-5">
+    <div className="w-[90%] max-w-95 fixed top-1/2 left-1/2 -translate-1/2 z-100 p-7 bg-(--card-light) dark:bg-(--card-dark) border border-(--delete-red) rounded-xl flex flex-col items-center gap-5">
       <p className="text-(--text-light) text-center">Are you sure you want to {message}?</p>
       <div className="flex flex-row items-center gap-5">
         <button
           onClick={cancel}
-          className="px-4 py-2 text-sm text-(--text-light) border border-(--border-light) rounded-md cursor-pointer"
+          className="px-4 py-2 text-sm text-(--text-light) dark:text-(--text-dark) border border-(--border-light) dark:border-(--border-dark) rounded-md cursor-pointer"
         >
           Cancel
         </button>

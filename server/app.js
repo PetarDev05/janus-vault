@@ -13,7 +13,7 @@ app.use(helmet());
 app.use(
   cors({
     methods: ["GET", "POST", "PATCH", "DELETE"],
-    origin: "http://localhost:5173",
+    origin: true,
     allowedHeaders: ["Content-type", "Authorization"],
     credentials: true,
   }),

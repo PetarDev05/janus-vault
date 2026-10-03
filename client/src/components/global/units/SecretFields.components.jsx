@@ -6,13 +6,13 @@ const SecretFields = ({ field, removeField }) => {
       <div
         type="text"
         onClick={() => console.log(field.index)}
-        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
+        className="flex-1 rounded-md border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
       >
         {field.key}
       </div>
       <div
         type="text"
-        className="flex-1 rounded-md border border-(--border-light) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
+        className="flex-1 rounded-md border border-(--border-light) dark:border-(--border-dark) bg-(--bg-light-primary) dark:bg-(--bg-dark-primary) text-(--text-light) outline-none py-1.5 px-4 min-w-0 text-sm overflow-scroll"
       >
         {field.value}
       </div>

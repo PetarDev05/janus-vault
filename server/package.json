@@ -1,11 +1,11 @@
 {
-  "name": "bifrost",
+  "name": "janus-vault",
   "version": "1.0.0",
   "description": "Simple server for private data manager app.",
   "main": "server.js",
   "scripts": {
-    "test": "node run ./test.js",
-    "dev": "nodemon ./server.js"
+    "dev": "nodemon ./server.js",
+    "start": "node ./server.js"
   },
   "keywords": [],
   "author": "PetarDev05",
